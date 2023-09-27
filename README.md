@@ -1,2 +1,2 @@
-The files contained herein are projects completed by me.
+Welcome! The files contained herein are projects completed by me.
 # project-files
