@@ -1,0 +1,45 @@
+This file used  http://sqlfiddle.com/#!17/7dae0/
+
+SELECT count(*) from "netflix_titles_info"
+
+SELECT * from "netflix_titles_info" LIMIT 8
+
+SELECT people.show_id, people.director, titles.title, titles.type
+from "netflix_people" people
+left join "netflix_titles_info" titles
+on people.show_id = titles.show_id;
+
+/Question 1 - How many movie titles are there in the database? (movies only, not tv shows
+select count(*) from "netflix_titles_info"
+where type = 'Movie'
+
+/Question 2 - When was the most recent batch of tv shows and/or movies added to the database?
+select max(date(date_added))
+from "netflix_titles_info"
+
+/Question 3 - List all the movies and tv shows in alphabetical order.
+select title, type
+from "netflix_titles_info"
+Order by title asc
+
+/Question 4 - Who was the Director for the movie The Starling?
+SELECT director
+from "netflix_titles_info" title
+left join "netflix_people" director
+on title.show_id = director.show_id
+where title.title = 'The Starling'
+
+/Question 5 - What is the oldest movie in the database and what year was it made?
+SELECT title, release_year
+from "netflix_titles_info"
+order by release_year asc
+limit 1
+           
+/Extra practive using subquery - what are the oldest tv shows in the database?
+SELECT title, type, release_year
+from "netflix_titles_info"
+where type = 'TV Show'
+and release_year<=
+(select min(release_year)
+from "netflix_titles_info"
+where type = 'TV Show')
