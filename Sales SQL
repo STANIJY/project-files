@@ -1,0 +1,102 @@
+select * from BIT_DB.customers limit 20
+
+select count(*) from BIT_DB.customers;
+
+SELECT * from BIT_DB.customers
+
+
+Select count(*) from JanSales
+
+Select * from JanSales
+
+Select count(*) from JanSales
+WHERE orderID IS NOT NULL
+AND orderID <> 'Order ID';
+
+Select count(*) from JanSales
+WHERE orderID = 'Order ID';
+
+Select * from JanSales
+where orderID IS NOT NULL;
+
+SELECT COUNT(orderid)
+FROM BIT_DB.JanSales
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
+
+SELECT * From JanSales
+
+SELECT * From JanSales
+WHERE Product ='iPhone'
+
+Select count(*)
+from JanSales
+Where Product='iPhone'
+AND length(orderID) = 6
+and orderid <> 'Order ID'
+
+Select * from FebSales
+
+Select * from customers
+
+
+Select distinct cust.acctnum, Feb.Product
+from customers cust
+inner join FebSales Feb
+on cust.order_id = Feb.orderID
+WHERE Feb.Product <> 'Product'
+
+SELECT distinct acctnum
+FROM BIT_DB.customers cust
+INNER JOIN BIT_DB.FebSales Feb
+ON cust.order_id=FEB.orderid
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
+
+
+Select min(price), Product
+FROM JanSales
+
+SELECT distinct product, min(price)
+FROM BIT_DB.JanSales
+GROUP BY product
+
+Select product, price
+From JanSales
+Where Product = 'Macbook Pro Laptop'
+
+ 
+Select JanSales.product, sum(quantity) * price
+as Revenue
+from JanSales
+WHERE orderID <> 'Order ID'
+Group by product
+    
+
+Select product, sum(quantity) as units, price, Sum(quantity) * price as revenue
+from JanSales
+WHERE orderID <> 'Order ID'
+GROUP BY product
+
+Select product, location, sum(quantity) as units, price, sum(quantity) * price as revenue
+from FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101'
+GROUP BY product
+
+SELECT Product, Quantity, price
+FROM FebSales
+
+
+
+Select customers.acctnum, FebSales.price
+FROM FebSales
+LEFT JOIN customers
+ON FebSales.orderID = customers.order_id;
+
+SELECT
+Count(customers.acctnum)
+from FebSales
+LEFT JOIN customers
+ON FebSales.orderID = customers.order_id
+
+
