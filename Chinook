@@ -1,0 +1,85 @@
+SELECT FirstName, LastName, InvoiceId, InvoiceDate, BillingCountry
+FROM chinook.customers
+JOIN chinook.invoices
+on customers.CustomerId = invoices.CustomerId
+WHERE invoices.BillingCountry = 'Brazil'
+
+
+SELECT Employeeid, FirstName, LastName, Title
+FROM chinook.employees
+WHERE Title LIKE 'Sales%'
+
+SELECT DISTINCT(BillingCountry)
+FROM chinook.invoices;
+
+
+
+Select customers.CustomerId, customers.FirstName, customers.LastName, invoices.InvoiceId, employees.FirstName, employees.LastName
+FROM chinook.invoices
+Join chinook.customers
+on invoices.CustomerId = customers.CustomerId
+JOIN chinook.employees
+on customers.SupportRepid = employees.EmployeeId
+
+
+Select customers.CustomerId, customers.FirstName, customers.LastName, Count(invoices.InvoiceId) as Invoices, invoices.BillingCountry, 
+employees.LastName as SalesAgent
+FROM chinook.invoices
+Join chinook.customers
+on invoices.CustomerId = customers.CustomerId
+JOIN chinook.employees
+on customers.SupportRepid = employees.EmployeeId
+GROUP BY customers.customerId
+
+
+Select Count(invoices.InvoiceId), Round(SUM(invoices.Total),0)
+FROM chinook.invoices
+Where Invoices.InvoiceDate Like '2009%'
+
+
+
+SELECT invoice_items.InvoiceLineid, tracks.Name
+FROM chinook.invoice_items
+join chinook.tracks
+on invoice_items.Trackid = tracks.Trackid
+
+
+
+
+SELECT
+    ii.InvoicelineId,
+    t.Name,
+    a1.albumid,
+    ar.name
+FROM
+    invoice_items as ii
+JOIN
+    tracks AS t ON ii.TrackId = t.TrackId
+JOIN
+    albums AS a1 ON t.AlbumId = a1.albumid
+JOIN
+    artists AS ar ON a1.ArtistId = ar.ArtistId;
+
+
+
+SELECT t.name as Track, al.Title as Album, m.Name as Media, g.Name as Genre
+FROM tracks t
+Join albums as al ON t.AlbumID = al.AlbumID
+join media_types as m ON t.MediaTypeID = m.MediaTypeId
+join genres as g ON t.Genreid = g.Genreid
+Order by al.Title 
+
+
+SELECT e.FirstName, e.LastName, SUM(i.Total) as TotalSales
+FROM invoices i
+join customers as c on i.CustomerId = c.CustomerId
+join employees as e ON c.SupportRepId = e.EmployeeID
+Group by e.FirstName, e.LastName;
+
+
+SELECT e.FirstName, e.LastName, ROUND(SUM(i.Total)) as TotalSales
+FROM invoices i
+join customers as c on i.CustomerId = c.CustomerId
+join employees as e ON c.SupportRepId = e.EmployeeID
+Group by e.FirstName, e.LastName
+LIMIT 1
